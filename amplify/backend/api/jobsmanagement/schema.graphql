@@ -13,3 +13,7 @@ type Person @model @auth(rules: [{allow: private}]) {
   jobs: [Job] @connection,
   username: String!
 }
+
+type Mutation {
+  
+}
