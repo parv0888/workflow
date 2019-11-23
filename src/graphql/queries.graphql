@@ -1,0 +1,70 @@
+# this is an auto generated file. This will be overwritten
+query GetJob($id: ID!) {
+  getJob(id: $id) {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
+  listJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      duration
+      status
+      owner {
+        id
+        name
+        pushToken
+        username
+      }
+    }
+    nextToken
+  }
+}
+query GetPerson($id: ID!) {
+  getPerson(id: $id) {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}
+query ListPersons(
+  $filter: ModelPersonFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPersons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+    nextToken
+  }
+}

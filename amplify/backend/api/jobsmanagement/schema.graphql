@@ -1,0 +1,15 @@
+type Job @model @auth(rules: [{allow: private}]) {
+	id: ID!
+	title: String!
+	duration: Int!
+  status: Int!
+  owner: Person @connection
+}
+
+type Person @model @auth(rules: [{allow: private}]) {
+  id: ID!
+	name: String!
+	pushToken: String!,
+  jobs: [Job] @connection,
+  username: String!
+}

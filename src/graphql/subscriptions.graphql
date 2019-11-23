@@ -1,0 +1,103 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateJob {
+  onCreateJob {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+subscription OnUpdateJob {
+  onUpdateJob {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+subscription OnDeleteJob {
+  onDeleteJob {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+subscription OnCreatePerson {
+  onCreatePerson {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}
+subscription OnUpdatePerson {
+  onUpdatePerson {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}
+subscription OnDeletePerson {
+  onDeletePerson {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}

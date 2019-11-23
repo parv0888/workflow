@@ -1,0 +1,19 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jobsmanagement-develop-194850-authRole",
+            "UnauthRoleArn": "arn:aws:iam::410038438026:role/amplify-jobsmanagement-develop-194850-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::410038438026:role/amplify-jobsmanagement-develop-194850-authRole",
+            "Region": "ap-south-1",
+            "DeploymentBucketName": "amplify-jobsmanagement-develop-194850-deployment",
+            "UnauthRoleName": "amplify-jobsmanagement-develop-194850-unauthRole",
+            "StackName": "amplify-jobsmanagement-develop-194850",
+            "StackId": "arn:aws:cloudformation:ap-south-1:410038438026:stack/amplify-jobsmanagement-develop-194850/2bab55b0-0dfc-11ea-ac3d-06184e58d994"
+        },
+        "categories": {
+            "auth": {
+                "jobsmanagementa9cf4c61": {}
+            }
+        }
+    }
+}

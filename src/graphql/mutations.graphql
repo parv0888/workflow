@@ -1,0 +1,103 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateJob($input: CreateJobInput!) {
+  createJob(input: $input) {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+mutation UpdateJob($input: UpdateJobInput!) {
+  updateJob(input: $input) {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+mutation DeleteJob($input: DeleteJobInput!) {
+  deleteJob(input: $input) {
+    id
+    title
+    duration
+    status
+    owner {
+      id
+      name
+      pushToken
+      jobs {
+        nextToken
+      }
+      username
+    }
+  }
+}
+mutation CreatePerson($input: CreatePersonInput!) {
+  createPerson(input: $input) {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}
+mutation UpdatePerson($input: UpdatePersonInput!) {
+  updatePerson(input: $input) {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}
+mutation DeletePerson($input: DeletePersonInput!) {
+  deletePerson(input: $input) {
+    id
+    name
+    pushToken
+    jobs {
+      items {
+        id
+        title
+        duration
+        status
+      }
+      nextToken
+    }
+    username
+  }
+}
