@@ -10,6 +10,7 @@ export type CreateJobInput = {
   title: string;
   duration: number;
   status: number;
+  startTime?: string | null;
   jobOwnerId?: string | null;
   personJobsId?: string | null;
 };
@@ -19,6 +20,8 @@ export type UpdateJobInput = {
   title?: string | null;
   duration?: number | null;
   status?: number | null;
+  startTime?: string | null;
+  jobOwnerId?: string | null;
   personJobsId?: string | null;
 };
 
@@ -28,19 +31,37 @@ export type DeleteJobInput = {
 
 export type CreatePersonInput = {
   id?: string | null;
-  name: string;
   pushToken: string;
+  name: string;
   username: string;
+  email: string;
 };
 
 export type UpdatePersonInput = {
   id: string;
-  name?: string | null;
   pushToken?: string | null;
+  name?: string | null;
   username?: string | null;
+  email?: string | null;
 };
 
 export type DeletePersonInput = {
+  id?: string | null;
+};
+
+export type CreateShutDownInput = {
+  id?: string | null;
+  expectedTimeHrs: number;
+  startTime?: string | null;
+};
+
+export type UpdateShutDownInput = {
+  id: string;
+  expectedTimeHrs?: number | null;
+  startTime?: string | null;
+};
+
+export type DeleteShutDownInput = {
   id?: string | null;
 };
 
@@ -49,6 +70,7 @@ export type ModelJobFilterInput = {
   title?: ModelStringFilterInput | null;
   duration?: ModelIntFilterInput | null;
   status?: ModelIntFilterInput | null;
+  startTime?: ModelStringFilterInput | null;
   and?: Array<ModelJobFilterInput | null> | null;
   or?: Array<ModelJobFilterInput | null> | null;
   not?: ModelJobFilterInput | null;
@@ -94,12 +116,22 @@ export type ModelIntFilterInput = {
 
 export type ModelPersonFilterInput = {
   id?: ModelIDFilterInput | null;
-  name?: ModelStringFilterInput | null;
   pushToken?: ModelStringFilterInput | null;
+  name?: ModelStringFilterInput | null;
   username?: ModelStringFilterInput | null;
+  email?: ModelStringFilterInput | null;
   and?: Array<ModelPersonFilterInput | null> | null;
   or?: Array<ModelPersonFilterInput | null> | null;
   not?: ModelPersonFilterInput | null;
+};
+
+export type ModelShutDownFilterInput = {
+  id?: ModelIDFilterInput | null;
+  expectedTimeHrs?: ModelIntFilterInput | null;
+  startTime?: ModelStringFilterInput | null;
+  and?: Array<ModelShutDownFilterInput | null> | null;
+  or?: Array<ModelShutDownFilterInput | null> | null;
+  not?: ModelShutDownFilterInput | null;
 };
 
 export type CreateJobMutation = {
@@ -111,14 +143,16 @@ export type CreateJobMutation = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type UpdateJobMutation = {
@@ -130,14 +164,16 @@ export type UpdateJobMutation = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type DeleteJobMutation = {
@@ -149,20 +185,21 @@ export type DeleteJobMutation = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type CreatePersonMutation = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -172,16 +209,18 @@ export type CreatePersonMutation = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
 };
 
 export type UpdatePersonMutation = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -191,16 +230,18 @@ export type UpdatePersonMutation = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
 };
 
 export type DeletePersonMutation = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -210,10 +251,34 @@ export type DeletePersonMutation = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
+};
+
+export type CreateShutDownMutation = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
+};
+
+export type UpdateShutDownMutation = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
+};
+
+export type DeleteShutDownMutation = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
 };
 
 export type GetJobQuery = {
@@ -225,14 +290,16 @@ export type GetJobQuery = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type ListJobsQuery = {
@@ -246,10 +313,12 @@ export type ListJobsQuery = {
     owner: {
       __typename: "Person";
       id: string;
-      name: string;
       pushToken: string;
+      name: string;
       username: string;
+      email: string;
     } | null;
+    startTime: string | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -257,7 +326,6 @@ export type ListJobsQuery = {
 export type GetPersonQuery = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -267,10 +335,13 @@ export type GetPersonQuery = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
 };
 
 export type ListPersonsQuery = {
@@ -278,13 +349,32 @@ export type ListPersonsQuery = {
   items: Array<{
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetShutDownQuery = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
+};
+
+export type ListShutDownsQuery = {
+  __typename: "ModelShutDownConnection";
+  items: Array<{
+    __typename: "ShutDown";
+    id: string;
+    expectedTimeHrs: number;
+    startTime: string | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -298,14 +388,16 @@ export type OnCreateJobSubscription = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type OnUpdateJobSubscription = {
@@ -317,14 +409,16 @@ export type OnUpdateJobSubscription = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type OnDeleteJobSubscription = {
@@ -336,20 +430,21 @@ export type OnDeleteJobSubscription = {
   owner: {
     __typename: "Person";
     id: string;
-    name: string;
     pushToken: string;
     jobs: {
       __typename: "ModelJobConnection";
       nextToken: string | null;
     } | null;
+    name: string;
     username: string;
+    email: string;
   } | null;
+  startTime: string | null;
 };
 
 export type OnCreatePersonSubscription = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -359,16 +454,18 @@ export type OnCreatePersonSubscription = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
 };
 
 export type OnUpdatePersonSubscription = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -378,16 +475,18 @@ export type OnUpdatePersonSubscription = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
 };
 
 export type OnDeletePersonSubscription = {
   __typename: "Person";
   id: string;
-  name: string;
   pushToken: string;
   jobs: {
     __typename: "ModelJobConnection";
@@ -397,16 +496,52 @@ export type OnDeletePersonSubscription = {
       title: string;
       duration: number;
       status: number;
+      startTime: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  name: string;
   username: string;
+  email: string;
+};
+
+export type OnCreateShutDownSubscription = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
+};
+
+export type OnUpdateShutDownSubscription = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
+};
+
+export type OnDeleteShutDownSubscription = {
+  __typename: "ShutDown";
+  id: string;
+  expectedTimeHrs: number;
+  startTime: string | null;
 };
 
 @Injectable({
   providedIn: "root"
 })
 export class APIService {
+  async SendNotificationToken(token: string): Promise<string | null> {
+    const statement = `mutation SendNotificationToken($token: String!) {
+        SendNotificationToken(token: $token)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      token
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <string | null>response.data;
+  }
   async CreateJob(input: CreateJobInput): Promise<CreateJobMutation> {
     const statement = `mutation CreateJob($input: CreateJobInput!) {
         createJob(input: $input) {
@@ -418,14 +553,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -447,14 +584,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -476,14 +615,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -499,7 +640,6 @@ export class APIService {
         createPerson(input: $input) {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -509,10 +649,13 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -528,7 +671,6 @@ export class APIService {
         updatePerson(input: $input) {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -538,10 +680,13 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -557,7 +702,6 @@ export class APIService {
         deletePerson(input: $input) {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -567,10 +711,13 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -580,6 +727,63 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeletePersonMutation>response.data.deletePerson;
+  }
+  async CreateShutDown(
+    input: CreateShutDownInput
+  ): Promise<CreateShutDownMutation> {
+    const statement = `mutation CreateShutDown($input: CreateShutDownInput!) {
+        createShutDown(input: $input) {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateShutDownMutation>response.data.createShutDown;
+  }
+  async UpdateShutDown(
+    input: UpdateShutDownInput
+  ): Promise<UpdateShutDownMutation> {
+    const statement = `mutation UpdateShutDown($input: UpdateShutDownInput!) {
+        updateShutDown(input: $input) {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateShutDownMutation>response.data.updateShutDown;
+  }
+  async DeleteShutDown(
+    input: DeleteShutDownInput
+  ): Promise<DeleteShutDownMutation> {
+    const statement = `mutation DeleteShutDown($input: DeleteShutDownInput!) {
+        deleteShutDown(input: $input) {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteShutDownMutation>response.data.deleteShutDown;
   }
   async GetJob(id: string): Promise<GetJobQuery> {
     const statement = `query GetJob($id: ID!) {
@@ -592,14 +796,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -627,10 +833,12 @@ export class APIService {
             owner {
               __typename
               id
-              name
               pushToken
+              name
               username
+              email
             }
+            startTime
           }
           nextToken
         }
@@ -655,7 +863,6 @@ export class APIService {
         getPerson(id: $id) {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -665,10 +872,13 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -690,13 +900,14 @@ export class APIService {
           items {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
           nextToken
         }
@@ -716,6 +927,55 @@ export class APIService {
     )) as any;
     return <ListPersonsQuery>response.data.listPersons;
   }
+  async GetShutDown(id: string): Promise<GetShutDownQuery> {
+    const statement = `query GetShutDown($id: ID!) {
+        getShutDown(id: $id) {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetShutDownQuery>response.data.getShutDown;
+  }
+  async ListShutDowns(
+    filter?: ModelShutDownFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListShutDownsQuery> {
+    const statement = `query ListShutDowns($filter: ModelShutDownFilterInput, $limit: Int, $nextToken: String) {
+        listShutDowns(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            expectedTimeHrs
+            startTime
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListShutDownsQuery>response.data.listShutDowns;
+  }
   OnCreateJobListener: Observable<OnCreateJobSubscription> = API.graphql(
     graphqlOperation(
       `subscription OnCreateJob {
@@ -728,14 +988,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`
     )
@@ -753,14 +1015,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`
     )
@@ -778,14 +1042,16 @@ export class APIService {
           owner {
             __typename
             id
-            name
             pushToken
             jobs {
               __typename
               nextToken
             }
+            name
             username
+            email
           }
+          startTime
         }
       }`
     )
@@ -797,7 +1063,6 @@ export class APIService {
         onCreatePerson {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -807,10 +1072,13 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`
     )
@@ -822,7 +1090,6 @@ export class APIService {
         onUpdatePerson {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -832,10 +1099,13 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`
     )
@@ -847,7 +1117,6 @@ export class APIService {
         onDeletePerson {
           __typename
           id
-          name
           pushToken
           jobs {
             __typename
@@ -857,12 +1126,60 @@ export class APIService {
               title
               duration
               status
+              startTime
             }
             nextToken
           }
+          name
           username
+          email
         }
       }`
     )
   ) as Observable<OnDeletePersonSubscription>;
+
+  OnCreateShutDownListener: Observable<
+    OnCreateShutDownSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateShutDown {
+        onCreateShutDown {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`
+    )
+  ) as Observable<OnCreateShutDownSubscription>;
+
+  OnUpdateShutDownListener: Observable<
+    OnUpdateShutDownSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateShutDown {
+        onUpdateShutDown {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`
+    )
+  ) as Observable<OnUpdateShutDownSubscription>;
+
+  OnDeleteShutDownListener: Observable<
+    OnDeleteShutDownSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteShutDown {
+        onDeleteShutDown {
+          __typename
+          id
+          expectedTimeHrs
+          startTime
+        }
+      }`
+    )
+  ) as Observable<OnDeleteShutDownSubscription>;
 }

@@ -7,13 +7,15 @@ subscription OnCreateJob {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 subscription OnUpdateJob {
@@ -24,13 +26,15 @@ subscription OnUpdateJob {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 subscription OnDeleteJob {
@@ -41,19 +45,20 @@ subscription OnDeleteJob {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 subscription OnCreatePerson {
   onCreatePerson {
     id
-    name
     pushToken
     jobs {
       items {
@@ -61,16 +66,18 @@ subscription OnCreatePerson {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
   }
 }
 subscription OnUpdatePerson {
   onUpdatePerson {
     id
-    name
     pushToken
     jobs {
       items {
@@ -78,16 +85,18 @@ subscription OnUpdatePerson {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
   }
 }
 subscription OnDeletePerson {
   onDeletePerson {
     id
-    name
     pushToken
     jobs {
       items {
@@ -95,9 +104,33 @@ subscription OnDeletePerson {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
+  }
+}
+subscription OnCreateShutDown {
+  onCreateShutDown {
+    id
+    expectedTimeHrs
+    startTime
+  }
+}
+subscription OnUpdateShutDown {
+  onUpdateShutDown {
+    id
+    expectedTimeHrs
+    startTime
+  }
+}
+subscription OnDeleteShutDown {
+  onDeleteShutDown {
+    id
+    expectedTimeHrs
+    startTime
   }
 }

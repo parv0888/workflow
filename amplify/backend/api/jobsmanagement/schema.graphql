@@ -3,17 +3,25 @@ type Job @model @auth(rules: [{allow: private}]) {
 	title: String!
 	duration: Int!
   status: Int!
-  owner: Person @connection
+  owner: Person @connection,
+  startTime: AWSDateTime
 }
 
 type Person @model @auth(rules: [{allow: private}]) {
   id: ID!
-	name: String!
 	pushToken: String!,
   jobs: [Job] @connection,
-  username: String!
+  name: String!,
+  username: String!,
+  email: String!
+}
+
+type ShutDown @model @auth(rules: [{allow: private}]) {
+  id : ID!,
+  expectedTimeHrs : Int!,
+  startTime : AWSDateTime
 }
 
 type Mutation {
-  
+  SendNotificationToken(token:String!): String @function(name: "SendNotification-${env}")
 }

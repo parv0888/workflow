@@ -22,5 +22,12 @@
 				}
 			}
 		}
+	},
+	"function": {
+		"jobsmanagementc707949c": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
 	}
 }

@@ -7,13 +7,15 @@ query GetJob($id: ID!) {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
@@ -25,10 +27,12 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
       status
       owner {
         id
-        name
         pushToken
+        name
         username
+        email
       }
+      startTime
     }
     nextToken
   }
@@ -36,7 +40,6 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
 query GetPerson($id: ID!) {
   getPerson(id: $id) {
     id
-    name
     pushToken
     jobs {
       items {
@@ -44,10 +47,13 @@ query GetPerson($id: ID!) {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
   }
 }
 query ListPersons(
@@ -58,12 +64,34 @@ query ListPersons(
   listPersons(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
+    }
+    nextToken
+  }
+}
+query GetShutDown($id: ID!) {
+  getShutDown(id: $id) {
+    id
+    expectedTimeHrs
+    startTime
+  }
+}
+query ListShutDowns(
+  $filter: ModelShutDownFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listShutDowns(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      expectedTimeHrs
+      startTime
     }
     nextToken
   }

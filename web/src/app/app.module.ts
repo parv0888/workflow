@@ -20,9 +20,12 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AuthComponent } from './components/auth/AuthComponent';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuthComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,7 +33,7 @@ import {
     AppRoutingModule,
 
     ThemeModule.forRoot(),
-
+    AmplifyAngularModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -41,6 +44,11 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    AmplifyService,
   ],
   bootstrap: [AppComponent],
 })

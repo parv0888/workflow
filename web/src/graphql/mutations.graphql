@@ -1,4 +1,7 @@
 # this is an auto generated file. This will be overwritten
+mutation SendNotificationToken($token: String!) {
+  SendNotificationToken(token: $token)
+}
 mutation CreateJob($input: CreateJobInput!) {
   createJob(input: $input) {
     id
@@ -7,13 +10,15 @@ mutation CreateJob($input: CreateJobInput!) {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 mutation UpdateJob($input: UpdateJobInput!) {
@@ -24,13 +29,15 @@ mutation UpdateJob($input: UpdateJobInput!) {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 mutation DeleteJob($input: DeleteJobInput!) {
@@ -41,19 +48,20 @@ mutation DeleteJob($input: DeleteJobInput!) {
     status
     owner {
       id
-      name
       pushToken
       jobs {
         nextToken
       }
+      name
       username
+      email
     }
+    startTime
   }
 }
 mutation CreatePerson($input: CreatePersonInput!) {
   createPerson(input: $input) {
     id
-    name
     pushToken
     jobs {
       items {
@@ -61,16 +69,18 @@ mutation CreatePerson($input: CreatePersonInput!) {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
   }
 }
 mutation UpdatePerson($input: UpdatePersonInput!) {
   updatePerson(input: $input) {
     id
-    name
     pushToken
     jobs {
       items {
@@ -78,16 +88,18 @@ mutation UpdatePerson($input: UpdatePersonInput!) {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
   }
 }
 mutation DeletePerson($input: DeletePersonInput!) {
   deletePerson(input: $input) {
     id
-    name
     pushToken
     jobs {
       items {
@@ -95,9 +107,33 @@ mutation DeletePerson($input: DeletePersonInput!) {
         title
         duration
         status
+        startTime
       }
       nextToken
     }
+    name
     username
+    email
+  }
+}
+mutation CreateShutDown($input: CreateShutDownInput!) {
+  createShutDown(input: $input) {
+    id
+    expectedTimeHrs
+    startTime
+  }
+}
+mutation UpdateShutDown($input: UpdateShutDownInput!) {
+  updateShutDown(input: $input) {
+    id
+    expectedTimeHrs
+    startTime
+  }
+}
+mutation DeleteShutDown($input: DeleteShutDownInput!) {
+  deleteShutDown(input: $input) {
+    id
+    expectedTimeHrs
+    startTime
   }
 }
