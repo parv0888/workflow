@@ -9,6 +9,18 @@ import { Job } from '../models/Job';
   providedIn: 'root',
 })
 export class JobsService {
+  get(id: any): Promise<Job> {
+    return from(this.apiService.GetJob(id)).pipe(map(j => {
+      return {
+        id: j.id,
+        title: j.title,
+        duration: j.duration,
+        owner: j.owner,
+        status: j.status,
+        startTime: new Date(j.startTime),
+      } as Job;
+    })).toPromise();
+  }
   delete(job: Job): Promise<null> {
     return from(this.apiService.DeleteJob({
       id: job.id,
@@ -18,7 +30,13 @@ export class JobsService {
       .toPromise();
   }
 
-  constructor(private apiService: APIService) { 
+  getCompletionPercentage(j: Job): number {
+    return Math.max(Math.min(Math.round(
+      ((new Date().valueOf() - (j.startTime || new Date()).valueOf()) / (1000 * 60 * 60 * j.duration)) * 100
+    ), 100), 0);
+  }
+  
+  constructor(private apiService: APIService) {
 
   }
   list(): Promise<Job[]> {
@@ -34,6 +52,7 @@ export class JobsService {
                 duration: j.duration,
                 owner: j.owner,
                 status: j.status,
+                startTime: new Date(j.startTime)
               } as Job;
             } else {
               return null;

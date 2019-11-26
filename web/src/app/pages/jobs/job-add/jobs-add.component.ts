@@ -32,16 +32,20 @@ export class JobAddComponent {
   }
 
   onSubmit(values: any) {
-    const startTime = new Date(values.startDate);
+    console.log(values);
+    const startTime = new Date(values.startDate as Date);
     startTime.setHours(values.startTime.hour);
-    startTime.setHours(values.startTime.minute);
-    this.apiService.CreateJob({
+    startTime.setMinutes(values.startTime.minute);
+    const jobInput = {
       duration: values.duration,
       jobOwnerId: values.ownerId,
       personJobsId: values.ownerId,
       status: values.status,
       title: values.title,
-      // startTime : startTime
-    }).then((res) => this.router.navigateByUrl('/pages/jobs/list'));
+      startTime : startTime.toISOString(),
+    };
+    console.log(jobInput);
+    this.apiService.CreateJob(jobInput)
+      .then((res) => this.router.navigateByUrl('/pages/jobs/list'));
   }
 }

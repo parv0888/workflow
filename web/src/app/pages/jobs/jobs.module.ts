@@ -9,6 +9,9 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbLayoutModule,
+  NbListComponent,
+  NbListModule,
 } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -18,6 +21,8 @@ import { AmplifyAngularModule } from 'aws-amplify-angular';
 import { JobsTableComponent } from './jobs-table/jobs-table.component';
 import { JobAddComponent } from './job-add/jobs-add.component';
 import { JobsComponent } from './jobs.component';
+import { JobsDashboardComponent } from './jobs-dashboard/jobs-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -38,11 +43,15 @@ import { JobsComponent } from './jobs.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    NbLayoutModule,
+    NbListModule,
+    ChartsModule
   ],
   declarations: [
     JobsComponent,
     JobsTableComponent,
     JobAddComponent,
+    JobsDashboardComponent,
   ],
 })
 export class JobsModule { }

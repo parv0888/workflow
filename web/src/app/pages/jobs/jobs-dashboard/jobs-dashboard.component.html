@@ -1,0 +1,59 @@
+<nb-layout>
+  <nb-layout-header>Dashboard</nb-layout-header>
+  <nb-layout-column class="colored-column-warning">
+    <nb-card>
+      <nb-card-header>
+        Notifications
+      </nb-card-header>
+      <nb-card-body>
+        <div>
+          <div class=form-group>
+            <label for="startDate" class="label">Send Every {{timeMins}} minutes</label>
+            <input type="number" [(ngModel)]='timeMins' nbInput fullWidth placeholder="Minutes" (ngModelChange)="timeMinsChanged()" />
+          </div>
+          <div class=form-group>
+            <nb-checkbox (checkedChange)="autoNotificationsChanged()" [(ngModel)]='autoNotifications'>Keep Sending</nb-checkbox>
+          </div>
+        </div>
+        <button (click)="sendNow()">Send Now</button>
+        <canvas baseChart [data]="pieChartData2" [labels]="pieChartLabels2" [chartType]="pieChartType"
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="false">
+        </canvas>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>
+        Progress
+      </nb-card-header>
+      <nb-card-body>
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+  <nb-layout-column class="colored-column-danger">
+    <nb-card>
+      <nb-card-header>
+        Jobs
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item *ngFor="let job of jobs">
+            <div class="row">
+              <div class="col-md-4">
+                {{ job.title }}
+              </div>
+              <div class="col-md-4">
+                {{ statuses[job.status] }}
+              </div>
+              <div>
+                {{ completionPercentages[job.id] }} %
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

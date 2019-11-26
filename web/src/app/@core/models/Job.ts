@@ -9,4 +9,5 @@ export interface Job{
     pushToken: string;
     username: string;
   };
+  startTime : Date;
 }

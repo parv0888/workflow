@@ -26,6 +26,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link : '/pages/jobs/list',
     icon : 'briefcase-outline',
   },
+  {
+    title : 'Dashboard',
+    link : '/pages/jobs/dashboard',
+    icon : 'monitor-outline',
+  },
   // {
   //   title: 'Layout',
   //   icon: 'layout-outline',

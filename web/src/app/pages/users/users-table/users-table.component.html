@@ -1,21 +1,5 @@
 <nb-card>
   <nb-card-header>
-    Notifications
-  </nb-card-header>
-  <nb-card-body>
-    <div class="form-inline">
-      <div class="form-group">
-        <label *ngIf="autoNotifications">{{ timeRemaining | number }}</label> /
-        <input [(ngModel)]="timeMins" type="text" class="input-full-width size-medium shape-rectangle" placeholder="Time in Mins" (ngModelChange)="timeMinsChanged()" />
-        <label>Auto Notifications</label>
-        <input type="checkbox" [(ngModel)]="autoNotifications" (ngModelChange)="autoNotificationsChanged()"/>
-        <button (click)="sendNow()">Send Now</button>
-      </div>
-    </div>
-  </nb-card-body>
-</nb-card>
-<nb-card>
-  <nb-card-header>
     Users
   </nb-card-header>
   <nb-card-body>
